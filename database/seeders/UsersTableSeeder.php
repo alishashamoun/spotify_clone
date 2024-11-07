@@ -28,6 +28,13 @@ class UsersTableSeeder extends Seeder
         ]);
         $user->assignRole('user');
 
+        $artist = User::create([
+            'name' => 'artist',
+            'email' => 'artist@gmail.com',
+            'password' => bcrypt('12345678')
+        ]);
+        $artist->assignRole('artist');
+
 
     }
 }

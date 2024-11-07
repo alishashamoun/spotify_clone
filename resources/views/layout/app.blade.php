@@ -6,7 +6,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Dashboard - Analytics | Spotify - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Dashboard - Analytics | Spotify</title>
 
     <meta name="description" content="" />
 
@@ -60,7 +60,13 @@
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
-            @include('layout.sidebar')
+            @if (auth()->user()->hasRole('admin'))
+                @include('layout.sidebar')
+            @elseif(auth()->user()->hasRole('artist'))
+                @include('layout.artist_sidebar')
+            @else
+                @include('layout.user_sidebar')
+            @endif
 
 
             <!-- Layout container -->
@@ -94,8 +100,13 @@
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ asset('assets/img/avatars/1.png') }}" alt
-                                            class="w-px-40 h-auto rounded-circle" />
+                                        @if (auth()->user()->profile_image)
+                                            <img src="{{ asset('storage/' . auth()->user()->profile_image) }}" alt
+                                                class="w-px-40 h-auto rounded-circle" />
+                                        @else
+                                            <img src="{{ asset('assets/img/avatars/1.png') }}" alt
+                                                class="w-px-40 h-auto rounded-circle" />
+                                        @endif
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
@@ -104,13 +115,20 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="{{ asset('assets/img/avatars/1.png') }}" alt
-                                                            class="w-px-40 h-auto rounded-circle" />
+                                                        @if (auth()->user()->profile_image)
+                                                            <img src="{{ asset('storage/' . auth()->user()->profile_image) }}"
+                                                                alt class="w-px-40 h-auto rounded-circle" />
+                                                        @else
+                                                            <img src="{{ asset('assets/img/avatars/1.png') }}" alt
+                                                                class="w-px-40 h-auto rounded-circle" />
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">{{ auth()->user()->name }}</span>
-                                                    <small class="text-muted">Admin</small>
+                                                    <span
+                                                        class="fw-semibold d-block text-capitalize">{{ auth()->user()->name }}</span>
+                                                    <small
+                                                        class="text-muted text-capitalize">{{ auth()->user()->getRoleNames()[0] }}</small>
                                                 </div>
                                             </div>
                                         </a>
@@ -155,8 +173,9 @@
 
                     </div>
                 </nav>
-
-                @yield('content')
+                <div class="content-wrapper">
+                    @yield('content')
+                </div>
                 <!-- Footer -->
                 <footer class="content-footer footer bg-footer-theme">
                     <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
@@ -234,6 +253,7 @@
         @endif
     </script>
 
+    @yield('scripts')
 </body>
 
 </html>

@@ -29,14 +29,25 @@ class AuthenticatedSessionController extends Controller
             'password' => 'required|string',
         ]);
 
-         // Add this line to debug the input
+        // Add this line to debug the input
         //  dd($request->all());
 
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            // Authentication passed
-            return redirect()->intended('/dashboard');
+            $user = Auth::user(); // Retrieve authenticated user
+
+            // Redirect based on role
+            if ($user->hasRole('admin')) {
+                return redirect()->route('dashboard');
+            } elseif ($user->hasRole('artist')) {
+                return redirect()->route('artist.dashboard');
+            } elseif ($user->hasRole('user')) {
+                return redirect()->route('user.dashboard');
+            } else {
+                // Default redirection if role doesn't match any condition
+                return redirect()->route('dashboard');
+            }
         }
 
         return back()->withErrors([

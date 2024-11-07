@@ -57,23 +57,29 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
-        <li class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-            <a href="{{ route('dashboard') }}" class="menu-link">
+        <li class="menu-item {{ request()->routeIs('artist.dashboard') ? 'active' : '' }}">
+            <a href="{{ route('artist.dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
         </li>
 
-        <li class="menu-item {{ request()->routeIs('users.*') ? 'active' : '' }}">
-            <a href="{{ route('users.index') }}" class="menu-link">
+        <li class="menu-item {{ request()->routeIs('artist.events.*') ? 'active' : '' }}">
+            <a href="{{ route('artist.events.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-user-detail"></i>
-                <div data-i18n="Basic">User</div>
+                <div data-i18n="Basic">Events</div>
             </a>
         </li>
-        <li class="menu-item {{ request()->routeIs('admin.track-approvals.index') ? 'active' : '' }}">
-            <a href="{{ route('admin.track-approvals.index') }}" class="menu-link">
+        <li class="menu-item {{ request()->routeIs('artist.albums.*') ? 'active' : '' }}">
+            <a href="{{ route('artist.albums.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-user-detail"></i>
-                <div data-i18n="Basic">Track Approvals</div>
+                <div data-i18n="Basic">Albums</div>
+            </a>
+        </li>
+        <li class="menu-item {{ request()->routeIs('artist.tracks.*') ? 'active' : '' }}">
+            <a href="{{ route('artist.tracks.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-user-detail"></i>
+                <div data-i18n="Basic">Tracks</div>
             </a>
         </li>
         <li class="menu-item ">
