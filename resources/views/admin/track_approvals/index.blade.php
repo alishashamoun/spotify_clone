@@ -28,10 +28,10 @@
                         <tr>
                             <td>{{ $track->title }}</td>
                             <td>{{ $track->artist->user->name }}</td>
-                            <td>{{ $track->genre }}</td>
+                            <td>{{ $track->genre->name }}</td>
                             <td>{{ $track->created_at->format('F d, Y') }}</td>
                             <td>
-                                <a href="{{ route('tracks.show', $track->id) }}" class="btn btn-info btn-sm">View</a>
+                                <a href="{{ route('admin.track-approvals.show', $track->id) }}" class="btn btn-info btn-sm">View</a>
                                 <form action="{{ route('admin.track-approvals.approve', $track->id) }}" method="POST"
                                     class="d-inline">
                                     @csrf

@@ -57,6 +57,8 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::resource('users', UserController::class);
 
     Route::get('/track-approvals', [TrackController::class, 'Appindex'])->name('admin.track-approvals.index');
+    Route::get('/track-show/{id}', [TrackController::class, 'show'])->name('admin.track-approvals.show');
+    Route::delete('/track-delete/{id}', [TrackController::class, 'destroy'])->name('admin.track-approvals.delete');
     Route::post('/track-approvals/{id}/approve', [TrackController::class, 'approve'])->name('admin.track-approvals.approve');
     Route::post('/track-approvals/{id}/reject', [TrackController::class, 'reject'])->name('admin.track-approvals.reject');
 });

@@ -22,7 +22,6 @@
                         </div>
                         <div>
                             <a href="{{ route('tracks.show', $track->id) }}" class="btn btn-info btn-sm">Stream</a>
-                            @can('manage tracks')
                                 <a href="{{ route('artist.tracks.edit', $track->id) }}"
                                     class="btn btn-secondary btn-sm">Edit</a>
                                 <form action="{{ route('artist.tracks.destroy', $track->id) }}" method="POST" class="d-inline">
@@ -30,7 +29,6 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                 </form>
-                            @endcan
                         </div>
                     </li>
                 @endif

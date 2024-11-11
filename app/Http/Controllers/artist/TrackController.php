@@ -129,7 +129,13 @@ class TrackController extends Controller
     public function show($id)
     {
         $track = Track::findOrFail($id);
-        return view('artist.tracks.show', compact('track'));
+        if (Auth::user()->hasRole('admin')) {
+
+            return view('artist.tracks.adminShow', compact('track'));
+        } else {
+
+            return view('artist.tracks.show', compact('track'));
+        }
     }
 
     public function edit($id)
@@ -188,8 +194,14 @@ class TrackController extends Controller
     }
     public function destroy($id)
     {
-        $track = Track::where('artist_id', Auth::user()->artist->id)
-            ->findOrFail($id);
+        if (Auth::user()->hasRole('admin')) {
+
+            $track = Track::findOrFail($id);
+        } else {
+
+            $track = Track::where('artist_id', Auth::user()->artist->id)
+                ->findOrFail($id);
+        }
 
         // Delete associated files
         if ($track->audio_file_path) {
@@ -201,7 +213,13 @@ class TrackController extends Controller
 
         $track->delete();
 
-        return redirect()->route('artist.tracks.index')->with('success', 'Track deleted successfully.');
+        if (Auth::user()->hasRole('admin')) {
+
+            return redirect()->route('admin.track-approvals.index')->with('success', 'Track deleted successfully.');
+        } else {
+
+            return redirect()->route('artist.tracks.index')->with('success', 'Track deleted successfully.');
+        }
     }
     public function stream($id)
     {
