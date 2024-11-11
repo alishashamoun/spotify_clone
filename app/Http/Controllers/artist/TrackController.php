@@ -106,17 +106,17 @@ class TrackController extends Controller
             $coverImagePath = null;
         }
 
-        $duration = FFMpeg::fromDisk('public')
-            ->open($audioPath)
-            ->getDurationInSeconds();
+        // $duration = FFMpeg::fromDisk('public')
+        //     ->open($audioPath)
+        //     ->getDurationInSeconds();
 
         $track = Track::create([
             'album_id' => $request->album_id,
             'artist_id' => auth()->user()->artist->id,
             'title' => $request->title,
             'genre_id' => $request->genre_id,
-            'duration' => ceil($duration),
-            // 'duration' => $request->duration,
+            // 'duration' => ceil($duration),
+            'duration' => $request->duration ?? 0,
             'audio_file_path' => $audioPath,
             'cover_image_path' => $coverImagePath,
             'description' => $request->description,
