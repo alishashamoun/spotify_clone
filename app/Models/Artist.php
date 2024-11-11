@@ -9,18 +9,18 @@ class Artist extends Model
     protected $guarded = [];
     public function events()
     {
-        return $this->hasMany(event::class);
+        return $this->hasMany(Event::class);
     }
     public function albums()
     {
-        return $this->hasMany(album::class);
+        return $this->hasMany(Album::class);
     }
     public function user()
     {
-        return $this->belongsTo(user::class);
+        return $this->belongsTo(User::class);
     }
     public function tracks()
     {
-        return $this->hasMany(track::class);
+        return $this->hasMany(Track::class);
     }
 }
