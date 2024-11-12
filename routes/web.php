@@ -6,6 +6,7 @@ use App\Http\Controllers\artist\EventController;
 use App\Http\Controllers\artist\TrackController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SocialController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminDashboardController;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,8 @@ Route::get('/', function () {
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('login/{provider}', [SocialController::class, 'redirectToProvider'])->name('social.login');
+Route::get('login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
