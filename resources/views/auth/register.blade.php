@@ -8,6 +8,10 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link href="{{ asset('front_asset/css/style.css') }}" rel="stylesheet" />
+     <!--! Toastr -->
+     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
     <title>Sign Up</title>
 </head>
 
@@ -23,13 +27,18 @@
                 @csrf
                 <div id="emailSection">
                     <label for="email">Email Address:</label><br />
-                    <input type="email" id="email" name="email" required /><br /><br />
+                    <input type="email" id="email" name="email" required />
+                    <label for="name" class="my-2">Name:</label><br />
+                    <input type="name" id="name" name="name" required />
+                    <br /><br />
                     <button type="button" onclick="showPasswordField()">Next</button>
                 </div>
 
                 <div id="passwordSection" style="display: none">
                     <label for="password">Password:</label><br />
                     <input type="password" id="password" name="password" required /><br /><br />
+                    <label for="confirm-password">Confirm-Password:</label><br />
+                    <input type="password" id="confirm-password" name="password_confirmation" required /><br /><br />
                     <button type="submit">Sign Up</button>
                 </div>
             </form>
@@ -65,5 +74,20 @@
         document.getElementById('passwordSection').style.display = 'block';
     }
 </script>
-
+<script>
+    @if (session('success'))
+        toastr.success("{{ session('success') }}");
+    @endif
+    @if (session('error'))
+        toastr.error("{{ session('error') }}")
+    @endif
+    @if (session('info'))
+        toastr.info("{{ session('info') }}")
+    @endif
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            toastr.error("{{ $error }}")
+        @endforeach
+    @endif
+</script>
 </html>

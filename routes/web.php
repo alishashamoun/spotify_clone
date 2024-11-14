@@ -4,6 +4,7 @@ use App\Http\Controllers\artist\AlbumController;
 use App\Http\Controllers\artist\ArtistController;
 use App\Http\Controllers\artist\EventController;
 use App\Http\Controllers\artist\TrackController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SocialController;
@@ -12,9 +13,19 @@ use App\Http\Controllers\AdminDashboardController;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/auth.php';
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+
+Route::get('/', [FrontendController::class, 'home'])->name('home');
+Route::get('/start-selling', [FrontendController::class, 'startSelling'])->name('start-selling');
+Route::get('/explore', [FrontendController::class, 'explore'])->name('explore');
+Route::get('/creator-tools', [FrontendController::class, 'creatorTools'])->name('creator-tools');
+Route::get('/feeds', [FrontendController::class, 'feeds'])->name('feeds');
+Route::get('/tracks', [FrontendController::class, 'tracks'])->name('tracks');
+Route::get('/trending', [FrontendController::class, 'trending'])->name('trending');
+Route::get('/feature', [FrontendController::class, 'feature'])->name('feature');
+Route::get('/most-liked', [FrontendController::class, 'mostLiked'])->name('most-liked');
+Route::get('/subscription', [FrontendController::class, 'subscription'])->name('subscription');
+// Route::get('/sign-up', [FrontendController::class, 'signUp'])->name('sign-up');
+// Route::get('/sign-in', [FrontendController::class, 'signIn'])->name('sign-in');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

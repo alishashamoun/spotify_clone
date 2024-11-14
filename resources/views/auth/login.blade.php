@@ -8,6 +8,10 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link href="{{ asset('front_asset/css/style.css') }}" rel="stylesheet" />
+     <!--! Toastr -->
+     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
     <title>Sign In</title>
 </head>
 
@@ -56,8 +60,22 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
 </script>
-<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
-    crossorigin="anonymous"></script>
-<script src="{{ asset('front_asset/js/script.js') }}"></script>
 
+<script src="{{ asset('front_asset/js/script.js') }}"></script>
+<script>
+    @if (session('success'))
+        toastr.success("{{ session('success') }}");
+    @endif
+    @if (session('error'))
+        toastr.error("{{ session('error') }}")
+    @endif
+    @if (session('info'))
+        toastr.info("{{ session('info') }}")
+    @endif
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            toastr.error("{{ $error }}")
+        @endforeach
+    @endif
+</script>
 </html>
