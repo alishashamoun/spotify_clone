@@ -16,7 +16,10 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link href="./assets/css/style.css" rel="stylesheet" />
+    <link href="{{
+    asset('assets/css/style.css')
+    }}
+    " rel="stylesheet" />
     <title>Subscription</title>
   </head>
 
@@ -72,7 +75,7 @@
       </nav>
     </header>
 
-    @yield('content')
+    @yield('content') 
 
     <footer class="feat-foot">
         <div class="container">
