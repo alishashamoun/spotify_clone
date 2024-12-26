@@ -8,8 +8,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card
-             "
-                        style=" background-color:
+             " style=" background-color:
              #c4c0c0; ">
                         <div class="card-header" style=" background-color:
              #eee7e7; ">

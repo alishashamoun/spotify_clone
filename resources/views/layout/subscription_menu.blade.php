@@ -75,7 +75,7 @@
       </nav>
     </header>
 
-    @yield('content') 
+    @yield('content')
 
     <footer class="feat-foot">
         <div class="container">
@@ -115,7 +115,7 @@
               <h4 class="footer-txt">Join the community</h4>
               <div class="social-icons mt-3">
                 <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a> 
                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
                 <a href="#"><i class="fa-brands fa-youtube"></i></a>
                 <a href="#"><i class="fa-brands fa-telegram"></i></a>
